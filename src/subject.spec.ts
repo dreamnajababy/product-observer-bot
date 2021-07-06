@@ -4,12 +4,9 @@ import SamsungObserver from "./samsung"
 test('subject is observing 2 product', () => {
     // arrage
     let subject = new Subject()
-    let appleObserver = new AppleObserver()
-    let samsungObserver = new SamsungObserver()
-
     // act
-    subject.addObserver(appleObserver)
-    subject.addObserver(samsungObserver)
+    subject.addObserver(new AppleObserver())
+    subject.addObserver(new SamsungObserver())
     const observers = subject.getObservers()
     
     // assert
