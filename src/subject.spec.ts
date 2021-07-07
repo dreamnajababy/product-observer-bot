@@ -1,16 +1,25 @@
 import Subject from "./subject"
-import AppleObserver from "./apple"
+import IphoneObserver from "./iphone"
 import SamsungObserver from "./samsung"
-test('subject is observing 2 product', () => {
-    // arrage
+test('subject add 2 product observers.', () => {
     let subject = new Subject()
-    // act
-    subject.addObserver(new AppleObserver())
+
+    subject.addObserver(new IphoneObserver())
     subject.addObserver(new SamsungObserver())
     const observers = subject.getObservers()
-    
-    // assert
+
     expect(observers.length).toBe(2)
-    expect(observers[0].name).toBe("Apple")
+    expect(observers[0].name).toBe("Iphone")
     expect(observers[1].name).toBe("Samsung")
+})
+test('subject is notifying with 2 product observers and get updated immediately state.', () => {
+    let subject = new Subject(new IphoneObserver(), new SamsungObserver())
+
+    subject.notify()
+
+    const observers = subject.getObservers()
+
+    for(const o of observers){
+        expect(o.state).toBe(1)
+    }
 })
